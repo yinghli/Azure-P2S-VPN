@@ -35,6 +35,7 @@ P2S VPN Gateway Setup
 ----------------------
 We don't include VPN gateway setup. If needed, you can check [Azure IPSec VPN with Cisco ASA using BGP](https://github.com/yinghli/azure-vpn-asa/edit/master/README.md) <br>
 After the VPN gateway setup, check the point-to-site configuration and add address pools, tunnel type, RADIUS authentication and RADIUS server information. <br> 
+
 Parameters            | Values
 ----------------------| -------------
 RADIUS Server         | 10.0.1.5
@@ -116,7 +117,7 @@ rad_recv: Access-Request packet from host 10.0.0.5 port 51205, id=11, length=219
 Windows Server 2016 NPS Configuration
 -----------------------
 ## NPS Radius Client Setup
-Add Gateway Subnet as client IP with share secret.<br>
+P2S VPN Gateway subnet is 10.0.0.0/24, add Gateway Subnet as client IP with share secret.<br>
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Radius_Client.PNG)
 ## NPS Policy Setup
 Setup a basic network policy. <br>
