@@ -83,8 +83,7 @@ vi /etc/freeradius/users
 testing Cleartext-Password := "password"
 ```
 
-Verification
-------------------------
+## Verification
 After all configuration, you can initial a vpn connection from your Windows or MAC client to check P2S connectivity. <br>
 
 From the freeRADIUS debug output, you can see the Radius request is comming from P2S VPN gateway with 10.0.0.5. 
@@ -115,9 +114,17 @@ Add Gateway Subnet as client IP with share secret.<br>
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Radius_Client.PNG)
 ## NPS Policy Setup
 Setup a basic network policy. <br>
-![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Policy_1.PNG}
+![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Policy_1.PNG)
+Setup a "Framed Prototol" as PPP. <br>
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Policy_2.PNG)
+Authentication method should include "MS-CHAPv2". <br>
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Policy_3.PNG)
+Radius Attributes is basic configuration. <br>
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Policy_4.PNG)
 ## NPS User Profile Setup
+You must enable user "dial-in" network access pemission. 
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_User_Dial-in.PNG)
+## Verification
+After all configuration, you can initial a vpn connection from your Windows or MAC client to check P2S connectivity. <br>
+You can check the logging from event viewer. <br>
+![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Logging.PNG)
