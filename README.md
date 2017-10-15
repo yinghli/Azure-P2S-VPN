@@ -34,9 +34,14 @@ Server secret         | cisco123
 
 P2S VPN Gateway Setup
 ----------------------
+We don't include VPN gateway setup. If needed, you can check [Azure IPSec VPN with Cisco ASA using BGP](https://github.com/yinghli/azure-vpn-asa/edit/master/README.md)
 After the VPN gateway setup, check the point-to-site configuration and add address pools, tunnel type, RADIUS authentication and RADIUS server information. <br> 
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2SVPNGW.PNG)
 After setup, click the "Download VPN Client" to save your VPN client configuration file. <br>
 Folders named 'WindowsAmd64' and 'WindowsX86' contain the Windows 64-bit and 32-bit installer packages. <br>
 Folder 'GenericDevice' contains general information used to create your own VPN client configuration.<br>
 Folder named 'Mac' contains a file named 'mobileconfig'. This file is used to configure Mac clients. <br>
+
+RADIUS Server Configuration
+-------------------------
+
