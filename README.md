@@ -29,13 +29,19 @@ VPN SKU               | VpnGw1
 VPN Address Pool      | 192.168.2.0/24
 VPN Tunnel Type       | IKEv2
 VPN Authentication    | RADIUS
-RADIUS Server         | 10.0.1.4
-Server secret         | cisco123
+
 
 P2S VPN Gateway Setup
 ----------------------
 We don't include VPN gateway setup. If needed, you can check [Azure IPSec VPN with Cisco ASA using BGP](https://github.com/yinghli/azure-vpn-asa/edit/master/README.md) <br>
 After the VPN gateway setup, check the point-to-site configuration and add address pools, tunnel type, RADIUS authentication and RADIUS server information. <br> 
+Parameters            | Values
+----------------------| -------------
+RADIUS Server         | 10.0.1.5
+Server secret         | cisco123
+users                 | testing
+passwor               | password
+
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2SVPNGW.PNG) <br>
 
 After setup, click the "Download VPN Client" to save your VPN client configuration file. <br>
