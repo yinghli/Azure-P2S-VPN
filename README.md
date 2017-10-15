@@ -1,6 +1,6 @@
 Azure Point to Site (P2S) VPN with RADIUS Authentication
 ========================================
-Azure networking release their P2S VPN support on MAC OS and EAP-MSCHAPv2 authentication. <br>
+Azure networking release P2S VPN support on IKEv2 and RADIUS authentication. <br>
 Now P2S VPN support both SSTP and IKEv2, authentication support both certificate and RADIUS. <br>
 This documentation will describe how to setup P2S VPN with EAP authentication. <br>
 We will use Windows Server 2016 NPS and FreeRADIUS as RADIUS server. <br>
@@ -56,7 +56,7 @@ FreeRADIUS Server Configuration
 -------------------------
 We setup a Ubuntu server in subnet vlan1 to host RADIUS and use [FreeRADIUS](http://www.freeradius.org/) to provide RADIUS services.<br>
 
-> **Note:** You can setup Radius server in VNET or on premise connected by site-to-site VPN. An ExpressRoute connection CANNOT be used.
+> **Note:** You can setup RADIUS server in VNET or on premise connected by site-to-site VPN. An ExpressRoute connection CANNOT be used.
 
 ## Install freeRADIUS
 ```
@@ -72,8 +72,8 @@ Listening on authentication address 127.0.0.1 port 18120 as server inner-tunnel
 Listening on proxy address * port 1814
 Ready to process requests.
 ```
-## Setup Radius Client
-P2S VPN Gateway subnet is 10.0.0.0/24, we add this subnet into Radius client configuration.
+## Setup RADIUS Client
+P2S VPN Gateway subnet is 10.0.0.0/24, we add this subnet into RADIUS client configuration.
 ```
 vi /etc/freeradius/clients.conf
 
@@ -83,7 +83,7 @@ client new {
         secret = cisco123
 }
 ```
-## Setup Radius users
+## Setup RADIUS users
 We add a user "testing" with password "password" as test user. 
 ```
 vi /etc/freeradius/users
@@ -94,7 +94,7 @@ testing Cleartext-Password := "password"
 ## Verification
 After all configuration, you can initial a vpn connection from your Windows or MAC client to check P2S connectivity. <br>
 
-From the freeRADIUS debug output, you can see the Radius request is from P2S VPN gateway with 10.0.0.5. 
+From the freeRADIUS debug output, you can see the RADIUS request is from P2S VPN gateway with source IP 10.0.0.5. 
 ```
 rad_recv: Access-Request packet from host 10.0.0.5 port 51205, id=11, length=219
         NAS-Identifier = "RD0003FF6951F2"
@@ -117,7 +117,7 @@ rad_recv: Access-Request packet from host 10.0.0.5 port 51205, id=11, length=219
 
 Windows Server 2016 NPS Configuration
 -----------------------
-## NPS Radius Client Setup
+## NPS RADIUS Client Setup
 P2S VPN Gateway subnet is 10.0.0.0/24, add Gateway Subnet as client IP with share secret.<br>
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Radius_Client.PNG)
 ## NPS Policy Setup
