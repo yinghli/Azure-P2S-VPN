@@ -41,7 +41,7 @@ Parameters            | Values
 RADIUS Server         | 10.0.1.5
 Server secret         | cisco123
 users                 | testing
-passwor               | password
+password              | password
 
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2SVPNGW.PNG) <br>
 
@@ -56,7 +56,7 @@ FreeRADIUS Server Configuration
 -------------------------
 We setup a Ubuntu server in subnet vlan1 to host RADIUS and use [FreeRADIUS](http://www.freeradius.org/) to provide RADIUS services.<br>
 
-> **Note:** You can setup Raidus server in VNET or On premise connected by site-to-site VPN. An ExpressRoute connection CANNOT be used.
+> **Note:** You can setup Radius server in VNET or on premise connected by site-to-site VPN. An ExpressRoute connection CANNOT be used.
 
 ## Install freeRADIUS
 ```
@@ -94,7 +94,7 @@ testing Cleartext-Password := "password"
 ## Verification
 After all configuration, you can initial a vpn connection from your Windows or MAC client to check P2S connectivity. <br>
 
-From the freeRADIUS debug output, you can see the Radius request is comming from P2S VPN gateway with 10.0.0.5. 
+From the freeRADIUS debug output, you can see the Radius request is from P2S VPN gateway with 10.0.0.5. 
 ```
 rad_recv: Access-Request packet from host 10.0.0.5 port 51205, id=11, length=219
         NAS-Identifier = "RD0003FF6951F2"
@@ -130,7 +130,7 @@ Authentication method should include "MS-CHAPv2". <br>
 Radius Attributes is basic configuration. <br>
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Policy_4.PNG)
 ## NPS User Profile Setup
-You must enable user "dial-in" network access pemission. 
+You must enable user "dial-in" network access permission. 
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_User_Dial-in.PNG)
 ## Verification
 After all configuration, you can initial a vpn connection from your Windows or MAC client to check P2S connectivity. <br>
