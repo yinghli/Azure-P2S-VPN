@@ -49,7 +49,7 @@ After setup, click the "Download VPN Client" to save your VPN client configurati
 Folders named 'WindowsAmd64' and 'WindowsX86' contain the Windows 64-bit and 32-bit installer packages. <br>
 Folder 'GenericDevice' contains general information used to create your own VPN client configuration.<br>
 Folder named 'Mac' contains a file named 'mobileconfig'. This file is used to configure Mac clients. <br>
-You need install one of them according to your platform. 
+More detail information, please check [here](https://docs.microsoft.com/en-us/azure/vpn-gateway/point-to-site-vpn-client-configuration-radius) 
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Folder.PNG)
 
 FreeRADIUS Server Configuration
