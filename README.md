@@ -46,7 +46,9 @@ You need install one of them according to your platform.
 
 FreeRADIUS Server Configuration
 -------------------------
-We setup a Ubuntu server in subnet vlan1 to host RADIUS and use [FreeRADIUS](http://www.freeradius.org/) to provide RADIUS services.<br> 
+We setup a Ubuntu server in subnet vlan1 to host RADIUS and use [FreeRADIUS](http://www.freeradius.org/) to provide RADIUS services.<br>
+
+> **Note:** You can setup Raidus server in VNET or On premise connected by site-to-site VPN. An ExpressRoute connection CANNOT be used.
 
 ## Install freeRADIUS
 ```
@@ -84,4 +86,6 @@ testing Cleartext-Password := "password"
 Verification
 ------------------------
 After all configuration, you can initial a vpn connection from your Windows or MAC client to check P2S connectivity.
+
+> **Note:** When the Windows device contains a large number of trusted root certificates, the message payload size during IKE exchange is large and causes IP layer fragmentation. The fragments are rejected at the Azure end, which results in the connection failing. The exact certificate count at which this problem occurs is difficult to estimate. As a result, IKEv2 connections from Windows devices are not guaranteed to work. When you configure both SSTP and IKEv2 in a mixed environment (consisting of Windows and Mac devices), the Windows VPN profile always tries IKEv2 tunnel first. If it fails due to the issue described here, it falls back to SSTP.
 
