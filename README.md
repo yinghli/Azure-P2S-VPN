@@ -34,7 +34,7 @@ Server secret         | cisco123
 
 P2S VPN Gateway Setup
 ----------------------
-We don't include VPN gateway setup. If needed, you can check [Azure IPSec VPN with Cisco ASA using BGP](https://github.com/yinghli/azure-vpn-asa/edit/master/README.md)
+We don't include VPN gateway setup. If needed, you can check [Azure IPSec VPN with Cisco ASA using BGP](https://github.com/yinghli/azure-vpn-asa/edit/master/README.md) <br>
 After the VPN gateway setup, check the point-to-site configuration and add address pools, tunnel type, RADIUS authentication and RADIUS server information. <br> 
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2SVPNGW.PNG)
 After setup, click the "Download VPN Client" to save your VPN client configuration file. <br>
@@ -42,6 +42,40 @@ Folders named 'WindowsAmd64' and 'WindowsX86' contain the Windows 64-bit and 32-
 Folder 'GenericDevice' contains general information used to create your own VPN client configuration.<br>
 Folder named 'Mac' contains a file named 'mobileconfig'. This file is used to configure Mac clients. <br>
 
-RADIUS Server Configuration
+FreeRADIUS Server Configuration
 -------------------------
+We setup a Ubuntu server in subnet vlan1 to host RADIUS and use [FreeRADIUS](http://www.freeradius.org/) to provide RADIUS services.<br> 
+
+## Install freeRADIUS
+```
+sudo apt-get install freeradius
+```
+## Test freeRADIUS installation
+```
+freeradius -X
+....
+Listening on authentication address * port 1812
+Listening on accounting address * port 1813
+Listening on authentication address 127.0.0.1 port 18120 as server inner-tunnel
+Listening on proxy address * port 1814
+Ready to process requests.
+```
+## Setup Radius Client
+P2S VPN Gateway subnet is 10.0.0.0/24, we add this subnet into Radius client configuration.
+```
+vi /etc/freeradius/clients.conf
+
+client new {
+        ipaddr = 10.0.0.0
+        netmask = 24
+        secret = cisco123
+}
+```
+##Setup Radius users
+We add a user "testing" with password "password" as test user. 
+```
+vi /etc/freeradius/users
+
+testing Cleartext-Password := "password"
+```
 
