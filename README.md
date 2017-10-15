@@ -108,3 +108,16 @@ rad_recv: Access-Request packet from host 10.0.0.5 port 51205, id=11, length=219
 
 > **Note:** When the Windows device contains a large number of trusted root certificates, the message payload size during IKE exchange is large and causes IP layer fragmentation. The fragments are rejected at the Azure end, which results in the connection failing. The exact certificate count at which this problem occurs is difficult to estimate. As a result, IKEv2 connections from Windows devices are not guaranteed to work. When you configure both SSTP and IKEv2 in a mixed environment (consisting of Windows and Mac devices), the Windows VPN profile always tries IKEv2 tunnel first. If it fails due to the issue described here, it falls back to SSTP.
 
+Windows Server 2016 NPS Configuration
+-----------------------
+## NPS Radius Client Setup
+Add Gateway Subnet as client IP with share secret.<br>
+![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Radius_Client.PNG)
+## NPS Policy Setup
+Setup a basic network policy. <br>
+![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Policy_1.PNG}
+![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Policy_2.PNG)
+![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Policy_3.PNG)
+![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Policy_4.PNG)
+## NPS User Profile Setup
+![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_User_Dial-in.PNG)
