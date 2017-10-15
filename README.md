@@ -127,7 +127,7 @@ Setup a "Framed Prototol" as PPP. <br>
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Policy_2.PNG)
 Authentication method should include "MS-CHAPv2". <br>
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Policy_3.PNG)
-Radius Attributes is basic configuration. <br>
+RADIUS Attributes is basic configuration. <br>
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Policy_4.PNG)
 ## NPS User Profile Setup
 You must enable user "dial-in" network access permission. 
