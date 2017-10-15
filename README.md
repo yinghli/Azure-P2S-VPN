@@ -1,4 +1,4 @@
-Azure Point to Site (P2S) VPN with EAP-MSCHAPv2 Authentication
+Azure Point to Site (P2S) VPN with RADIUS Authentication
 ========================================
 Azure networking release their P2S VPN support on MAC OS and EAP-MSCHAPv2 authentication. <br>
 Now P2S VPN support both SSTP and IKEv2, authentication support both certificate and RADIUS. <br>
@@ -85,7 +85,26 @@ testing Cleartext-Password := "password"
 
 Verification
 ------------------------
-After all configuration, you can initial a vpn connection from your Windows or MAC client to check P2S connectivity.
+After all configuration, you can initial a vpn connection from your Windows or MAC client to check P2S connectivity. <br>
+
+From the freeRADIUS debug output, you can see the Radius request is comming from P2S VPN gateway with 10.0.0.5. 
+```
+rad_recv: Access-Request packet from host 10.0.0.5 port 51205, id=11, length=219
+        NAS-Identifier = "RD0003FF6951F2"
+        NAS-Port-Type = Virtual
+        Tunnel-Type:0 = ESP
+        Tunnel-Medium-Type:0 = IPv4
+        Framed-MTU = 1300
+        EAP-Message = 0x020200421a0202003d31b4dfea2672ed6cb8ab93f16c8903c7bb0000000000000000ae1ec0b318da0e39ea18993698e1e034e8ac1f2c7f0187e60074657374696e67
+        User-Name = "testing"
+        State = 0x2cf04a872df2508b7de07a0d613199ca
+        MS-RAS-Vendor = 311
+        MS-Network-Access-Server-Type = Remote-Access-Server
+        Proxy-State = 0xfe800000000000003190a616c233831900000024
+        Message-Authenticator = 0x74a564cb5c2dbcb6cd6cd9264d70acda
+```
+
+
 
 > **Note:** When the Windows device contains a large number of trusted root certificates, the message payload size during IKE exchange is large and causes IP layer fragmentation. The fragments are rejected at the Azure end, which results in the connection failing. The exact certificate count at which this problem occurs is difficult to estimate. As a result, IKEv2 connections from Windows devices are not guaranteed to work. When you configure both SSTP and IKEv2 in a mixed environment (consisting of Windows and Mac devices), the Windows VPN profile always tries IKEv2 tunnel first. If it fails due to the issue described here, it falls back to SSTP.
 
