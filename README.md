@@ -9,7 +9,7 @@ Topology
 -----------------
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2SVPN.png)
 
-Azure P2S VPN Setup
+Azure Global P2S VPN Setup
 --------------------
 In Azure side, we will use Azure Portal to setup all vpn configuration. PowerShell and Azure CLI can do the same setup. <br>
 We will use below parameters to setup. <br>
@@ -31,7 +31,7 @@ VPN Tunnel Type       | IKEv2
 VPN Authentication    | RADIUS
 
 
-P2S VPN Gateway Setup
+P2S VPN Gateway Portal Setup
 ----------------------
 We don't include VPN gateway setup. If needed, you can check [Azure IPSec VPN with Cisco ASA using BGP](https://github.com/yinghli/azure-vpn-asa/edit/master/README.md) <br>
 After the VPN gateway setup, check the point-to-site configuration and add address pools, tunnel type, RADIUS authentication and RADIUS server information. <br> 
@@ -51,6 +51,30 @@ Folder 'GenericDevice' contains general information used to create your own VPN 
 Folder named 'Mac' contains a file named 'mobileconfig'. This file is used to configure Mac clients. <br>
 More detail information, please check [here](https://docs.microsoft.com/en-us/azure/vpn-gateway/point-to-site-vpn-client-configuration-radius) 
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Folder.PNG)
+
+Azure China P2S VPN Setup
+--------------------
+In Azure China, we only support PowerShell to setup all P2S vpn configuration.<br>
+
+Parameters            | Values
+----------------------| -------------
+VNET Name             | RL-RSM-VNET-BJ1
+Address Space         | 10.2.8.0/23
+Resource Group        | YL-RSM-CN
+Location              | China North
+Subnet                | default
+Address Range         | 10.2.8.0/24
+GatewaySubnet         | 10.2.9.0/24
+VPN Gateway Name      | P2SIKE
+VPN Type              | Route-based
+VPN SKU               | VpnGw1
+VPN Address Pool      | 192.168.1.0/24
+VPN Tunnel Type       | IKEv2
+VPN Authentication    | RADIUS
+
+After the gateway setup, you need to open PowerShell to setup P2S configurations.<br>
+
+
 
 FreeRADIUS Server Configuration
 -------------------------
