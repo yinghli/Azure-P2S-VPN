@@ -52,49 +52,6 @@ Folder named 'Mac' contains a file named 'mobileconfig'. This file is used to co
 More detail information, please check [here](https://docs.microsoft.com/en-us/azure/vpn-gateway/point-to-site-vpn-client-configuration-radius) 
 ![](https://github.com/yinghli/Azure-P2S-VPN/blob/master/P2S_Folder.PNG)
 
-Azure China P2S VPN Setup
---------------------
-In Azure China, we only support PowerShell to setup all P2S vpn configuration.<br>
-
-Parameters            | Values
-----------------------| -------------
-VNET Name             | RL-RSM-VNET-BJ1
-Address Space         | 10.2.8.0/23
-Resource Group        | YL-RSM-CN
-Location              | China North
-Subnet                | default
-Address Range         | 10.2.8.0/24
-GatewaySubnet         | 10.2.9.0/24
-VPN Gateway Name      | P2SIKE
-VPN Type              | Route-based
-VPN SKU               | VpnGw1
-VPN Address Pool      | 192.168.1.0/24
-VPN Tunnel Type       | IKEv2
-VPN Authentication    | RADIUS
-RADIUS Server         | 10.2.8.4
-Server secret         | cisco123
-users                 | testing
-password              | password
-
-After the gateway setup, you need to open PowerShell to setup P2S configurations.<br>
-
-## Get Current VPN Gateway
-```
-$gw = Get-AzureRmVirtualNetworkGateway -ResourceGroupName YL-RSM-CN -Name P2SIKE
-```
-## Create a secure string for the RADIUS secret
-```
-$Secure_Secret=Read-Host -AsSecureString -Prompt "RadiusSecret"
-```
-## Enable P2S configuration 
-```
-Set-AzureRmVirtualNetworkGateway -VirtualNetworkGateway $gw -VpnClientAddressPool "192.168.1.0/24" -VpnClientProtocol IkeV2 -RadiusServerAddress "10.2.8.4" -RadiusServerSecret $Secure_Secret
-```
-## Prepare client configuration files
-```
-$url = New-AzureRmVpnClientConfiguration -ResourceGroupName YL-RSM-CN -AuthenticationMethod EAPMSCHAPv2 -Name P2SIKE
-$url.VpnProfileSASUrl
-```
 
 FreeRADIUS Server Configuration
 -------------------------
