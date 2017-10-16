@@ -71,10 +71,30 @@ VPN SKU               | VpnGw1
 VPN Address Pool      | 192.168.1.0/24
 VPN Tunnel Type       | IKEv2
 VPN Authentication    | RADIUS
+RADIUS Server         | 10.2.8.4
+Server secret         | cisco123
+users                 | testing
+password              | password
 
 After the gateway setup, you need to open PowerShell to setup P2S configurations.<br>
 
-
+## Get Current VPN Gateway
+```
+$gw = Get-AzureRmVirtualNetworkGateway -ResourceGroupName YL-RSM-CN -Name P2SIKE
+```
+## Create a secure string for the RADIUS secret
+```
+$Secure_Secret=Read-Host -AsSecureString -Prompt "RadiusSecret"
+```
+## Enable P2S configuration 
+```
+Set-AzureRmVirtualNetworkGateway -VirtualNetworkGateway $gw -VpnClientAddressPool "192.168.1.0/24" -VpnClientProtocol IkeV2 -RadiusServerAddress "10.2.8.4" -RadiusServerSecret $Secure_Secret
+```
+## Prepare client configuration files
+```
+$url = New-AzureRmVpnClientConfiguration -ResourceGroupName YL-RSM-CN -AuthenticationMethod EAPMSCHAPv2 -Name P2SIKE
+$url.VpnProfileSASUrl
+```
 
 FreeRADIUS Server Configuration
 -------------------------
